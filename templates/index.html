@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>NFL Machine Learning Predictor</title>
+  <link rel="icon" href="{{ url_for('static', filename='nfl_fav.ico') }}" sizes="16x16">
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/scrolling-nav.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container-fluid">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">NFL Machine Learning</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#predict">Prediction</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#historical">Historical</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid" id="header">
+  </div>
+
+  <div class="container-fluid">
+    <img src="{{ url_for('static', filename='nfl_ml_banner.png') }}" width="100%" height="250px"></img>
+  </div>
+
+  <section id="about">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12 mx-auto overflow-auto">
+          <h3>An interactive web application that attempts to predict the win results of NFL Playoff games</h3>
+          <p class="lead" style="font-weight: 600">Features</p>
+          <ul>
+            <li>Chart of 2019 NFL season with win/loss predictions for all teams</li>
+            <li>Four selectable models - Logistic Regression, XGBoost, SVC, and Optimized Gradient Booster</li>
+            <li>Ablity to compare models using historical data</li>
+          </ul>
+          <dl>
+            <dt>Prediction Models</dt>
+            <dd>
+              The models were coded in terms of the team winning, “1”, or losing, “0”, the game.
+              The initial model contained 29 variables, but 15 variables that entered into the model
+              had little effect on the results and were removed with most important variables being
+              pass attempts, pass completions, rush attempts, sacks yards, and score. We trained the
+              model using train test split to split the data into random test and train subsets
+              with a training size of 25%. In an effort to determine how well the different models
+              predicted actual game outcomes, we generated a table of predicted versus actual outcomes.
+            </dd>
+            <dd>
+              One of the shortcomings of this type of modeling is that the binary dependent variable
+              fails to differentiate between levels of victory. Some may argue that the game statistics
+              from a 50-point victory would be markedly different from those obtained in a 1-point win.
+              Our models, however, are not concerned with the margin of victory, only with the specific
+              outcome (win or loss). The Number of wins is what determines the first-place finisher,
+              not the cumulative margins of victory.
+            </dd>
+          </dl>
+          <!-- Next -->
+          <p>&nbsp;</p>
+          <p>
+            <div class="clearfix">
+              <img src="{{ url_for('static', filename='logreg.png') }}" height="146px" width="347px" alt="Logistic Regression"
+                class="float-left pull-left mr-2">
+              <dl>
+                <dt>
+                  Logistic Regression
+                </dt>
+                <dd>
+                  The logistic regression model estimates the probability of the home team winning the game
+                  given the differences, or margins, of in-game statistics found to be significant.
+                  Logistic regression is an easy to implement and easy to understand method to apply to
+                  prediction problem, moreover it gives us additional insight through the estimated coefficients.
+                </dd>
+              </dl>
+            </div>
+          </p>
+          <p>&nbsp;</p>
+          <!-- Next -->
+          <p>
+            <div class="clearfix">
+              <img src="{{ url_for('static', filename='xgb.png') }}" height="146px" width="347px" alt="XG Boost" class="float-left pull-left mr-2">
+              <dl>
+                <dt>
+                  XGBoost Model
+                </dt>
+                <dd>
+                  The XGBoost library implements the gradient boosting decision tree algorithm.
+                  The main benefits of using XGBoost are execution speed and model performance.
+                </dd>
+                <dd>
+                  Boosting is an ensemble technique where new models are added to correct the errors made by existing
+                  models.
+                  Models are added sequentially until no further improvements can be made.
+                </dd>
+                <dd>
+                  It builds the model in a stage-wise fashion like other boosting methods do, and it generalizes
+                  them by allowing optimization of an arbitrary differentiable loss function. (Training Loss and
+                  Validation Loss)
+                </dd>
+                <dd>
+                  The logistic function is typically used for binary classification like in our prediction for win or
+                  loss.
+                </dd>
+              </dl>
+            </div>
+          </p>
+          <p>&nbsp;</p>
+          <!-- Next -->
+          <p>
+            <div class="clearfix">
+              <img src="{{ url_for('static', filename='svc.png') }}" height="146px" width="347px" alt="SVC" class="float-left pull-left mr-2">
+              <dl>
+                <dt>
+                  SVC Model
+                </dt>
+                <dd>
+                  For a dataset consisting of features set and labels set, an SVM classifier builds a model to predict
+                  classes for new examples. It assigns new example/data points to one of the classes. If there are only
+                  2 classes then it can be called as a Binary SVM Classifier. SVMS are a byproduct of Neural Network.
+                  They are widely applied to pattern classification and regression problems.
+                </dd>
+                <dd>
+                  Default Kernel Radial Basis Function Kernel: It is also known as RBF kernel. For distance metric
+                  squared euclidean distance is used here. It is used to draw completely non-linear hyperplanes.
+                </dd>
+              </dl>
+            </div>
+          </p>
+          <p>&nbsp;</p>
+          <!-- Next -->
+          <p>
+            <div class="clearfix">
+              <img src="{{ url_for('static', filename='gb.png') }}" height="146px" width="347px" alt="Optimized Gradient Booster" class="float-left pull-left mr-2">
+              <dl>
+                <dt>
+                  Optimized Gradient Booster
+                </dt>
+                <dd>
+                  Similar to XGBoost, we have optimized the parameters bringing up the accuracy from 53 to 85%
+                </dd>
+              </dl>
+            </div>
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="predict" class="bg-light">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12 mx-auto">
+          <h2>2019 Prediction</h2>
+          <form>
+            <div class="form-group">
+              Select :
+              <select id="selCurrentModel" onchange="optionChangedCurrentModel(this.value)"></select>
+            </div>
+          </form>
+          <div id="predictor-table"><i class="fas fa-sync fa-spin"></i></div>
+        </div>
+      </div><!-- End row Selection Criteria -->
+      <div class="row">
+        <div class="col-lg-12 mx-auto" id="data-martix">
+        </div>
+      </div><!-- End row Data Array -->
+    </div>
+  </section>
+
+  <section id="historical">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12 mx-auto">
+          <h2>Historical</h2>
+          <form>
+            <div class="form-group">
+              Select :
+              <select id="selSeason" onchange="optionChangedSeason(this.value)"></select>
+              <select id="selModel" onchange="optionChangedModel(this.value)"></select>
+            </div>
+          </form>
+          <div id="historical-table"><i class="fas fa-sync fa-spin"></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-left text-white">Copyright &copy; Data Visualization 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+    integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
+  <!-- Plugin JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+  <!-- Custom JavaScript for this theme -->
+  <script src="{{ url_for('static', filename='js/scrolling-nav.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/app-prediction.js') }}"></script>
+
+</body>
+
+</html>
