@@ -1,12 +1,10 @@
 <img src="images/logo.png">
 
-Team Members: Ashley Patterson, Upendra Addepalle, Mrinalini Darswal
-
 ## About
 
 An interactive web application that attempts to predict the win results of NFL games. 
 
-* [App Link](https://nfl-ml.herokuapp.com/)
+* [App Link](https://machine-nfl.herokuapp.com)
 * [Dataset](https://www.reddit.com/r/NFLstatheads/comments/bmrwgp/i_scraped_a_bunch_of_nfl_data_from_2002_through/ "dataset")
 
 
